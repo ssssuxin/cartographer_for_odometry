@@ -1,6 +1,5 @@
-# 仿真  
-本工程使用cartographer完全替代 里程计和imu 工作  
-仅仅需要输入2D雷达数据即可重定位建图导航 使用和安装 方式可见 本页下面的 “环境配置.txt” 和 cartographer下的 “配置经验.txt”
-
-# N10雷达的驱动  
-可见“环境配置.txt”配置雷达驱动
+这个就是N10雷达直接进行建图导航  
+先安装好  
+使用方式  
+roslaunch turtlebot3_slam turtlebot3_slam.launch slam_methods:=cartographer
+roslaunch cartographer_ros turtlebot3_sim_mapbuild.launch configuration_basename:=turtlebot3_lds_2d_gazebo.lua
