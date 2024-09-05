@@ -1,0 +1,8 @@
+prefix=/home/suxin/English_path/fac_pro_9_5/cartographer_for_odometry/turtlebot3/devel
+
+Name: turtlebot3_bringup
+Description: Description of turtlebot3_bringup
+Version: 1.2.6
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: roscpp std_msgs sensor_msgs diagnostic_msgs turtlebot3_msgs

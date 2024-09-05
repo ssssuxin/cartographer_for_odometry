@@ -1,0 +1,8 @@
+prefix=/home/suxin/English_path/fac_pro_9_5/cartographer_for_odometry/N10_Driver/install
+
+Name: lslidar_msgs
+Description: Description of lslidar_msgs
+Version: 1.2.0
+Cflags: -I${prefix}/include
+Libs: -L${prefix}/lib 
+Requires: message_runtime std_msgs

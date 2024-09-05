@@ -1,0 +1,8 @@
+prefix=/home/suxin/English_path/fac_pro_9_5/cartographer_for_odometry/cartographer/install_isolated
+
+Name: cartographer_ros_msgs
+Description: Description of cartographer_ros_msgs
+Version: 1.0.0
+Cflags: -I${prefix}/include
+Libs: -L${prefix}/lib 
+Requires: geometry_msgs std_msgs message_runtime

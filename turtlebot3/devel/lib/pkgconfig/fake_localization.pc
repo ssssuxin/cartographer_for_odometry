@@ -1,0 +1,8 @@
+prefix=/home/suxin/English_path/fac_pro_9_5/cartographer_for_odometry/turtlebot3/devel
+
+Name: fake_localization
+Description: Description of fake_localization
+Version: 1.17.3
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: geometry_msgs nav_msgs roscpp rospy

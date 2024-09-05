@@ -1,0 +1,8 @@
+prefix=/home/suxin/English_path/fac_pro_9_5/cartographer_for_odometry/turtlebot3/devel
+
+Name: voxel_grid
+Description: Description of voxel_grid
+Version: 1.17.3
+Cflags: -I/home/suxin/English_path/fac_pro_9_5/cartographer_for_odometry/turtlebot3/src/navigation/voxel_grid/include
+Libs: -L${prefix}/lib -lvoxel_grid
+Requires: roscpp

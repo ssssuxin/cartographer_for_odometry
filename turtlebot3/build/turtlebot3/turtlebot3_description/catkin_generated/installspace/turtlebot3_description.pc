@@ -1,0 +1,8 @@
+prefix=/home/suxin/English_path/fac_pro_9_5/cartographer_for_odometry/turtlebot3/install
+
+Name: turtlebot3_description
+Description: Description of turtlebot3_description
+Version: 1.2.6
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: urdf xacro
