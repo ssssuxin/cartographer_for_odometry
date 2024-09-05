@@ -1,0 +1,37 @@
+<robot
+  name="myself_udrf">
+  
+  <link name="base_link"/>
+ 
+  <link name="rslidar">
+    <visual>
+      <origin xyz="0 0 0" />
+      <geometry>
+        <cylinder length="0.05" radius="0.05" />
+      </geometry>
+      <material name="gray" />
+    </visual>
+  </link>
+ 
+  <joint name="laser2link" type="fixed">
+    <parent link="base_link" />
+    <child link="rslidar" />
+    <origin xyz="-0.25 0 0.4" rpy="0 0 0" />
+  </joint>
+ 
+  <link name="imu">
+    <visual>
+      <origin xyz="0 0 0" />
+      <geometry>
+        <cylinder length="0.01" radius="0.01" />
+      </geometry>
+      <material name="gray" />
+    </visual>
+  </link>
+ 
+  <joint name="imu2link" type="fixed">
+    <parent link="base_link" />
+    <child link="imu" />
+    <origin xyz="0 0 0" rpy="0 0 0" />
+  </joint>
+</robot>

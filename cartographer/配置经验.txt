@@ -1,0 +1,50 @@
+本算法与上一级目录的turtlebot3一起使用
+编译
+cartographer中 先到目录下面执行install_abseil.sh 后 catkin_make_isolated --install --use-ninja  
+ceres安装需要依赖sudo apt-get install liblapack-dev libsuitesparse-dev libcxsparse3 libgflags-dev libgoogle-glog-dev libgtest-dev
+编译吧这个打开cmake -DEIGENSPARSE=ON ..
+报错有可能是修改文件然后读取对比异常，此时删除其他3个工作空间重新编译
+记得安装 ros-noetic-map-server
+
+turttlebot3中catkin_make
+------------------------------------------------------------------------------------
+建图
+export TURTLEBOT3_MODEL=burger
+~/English_Path/human_like_robot/turtlebot3$ roslaunch turtlebot3_gazebo turtlebot3_house.launch
+~/English_Path/human_like_robot/turtlebot3$ roslaunch turtlebot3_slam turtlebot3_slam.launch slam_methods:=cartographer
+~/English_Path/human_like_robot/cartographer$ roslaunch cartographer_ros turtlebot3_sim_mapbuild.launch configuration_basename:=turtlebot3_lds_2d_gazebo.lua
+
+
+保存pb文件（用于重定位）rosservice call /write_state "{filename: '/home/suxin/English_Path/human_like_robot/cartographer/map/test.pbstream'}"
+pb文件转pgm rosrun cartographer_ros cartographer_pbstream_to_ros_map -map_filestem=./test2 -pbstream_filename=./test.pbstream -resolution=0.05
+
+重定位
+~/English_Path/human_like_robot/turtlebot3$ roslaunch turtlebot3_gazebo turtlebot3_house.launch
+~/English_Path/human_like_robot/turtlebot3$ roslaunch turtlebot3_slam pure_location.launch
+~/English_Path/human_like_robot/cartographer$ roslaunch cartographer_ros turtlebot3_pure_relocation.launch （注意修改pbstream文件和yaml文件路径）
+
+流程
+①建图获取.pbstream文件
+②在turtlebot3_pure_relocation.launch 中修改.pbstream文件路径 和 栅格地图文件路径
+
+------------------------------------------------------------------------------------
+问题① 找不到 .lua文件
+描述：我从turtlebot3弄了一个config文件夹到目录下，此时路径无法找到。原因是他会从install空间下面去找这个路径，
+解决：然而将src的文件复制到install空间需要在cmakelist.txt里面的install里面整一下
+
+问题②sensor_to_tracking->translation().norm() < 1e-5 The IMU frame must be colocated with the tracking frame.
+描述：原因不详
+解决：更换.lua配置文件
+
+
+今天查到的关于cartographer lua配置的一些信息（记住在src里面改需要重新编译才行，所以在src改了要在install也改一下）
+①TRAJECTORY_BUILDER_2D.use_imu_data设置成false 那么就可以不输入imu
+②use_odometry = false设置成false就可以不输入odom
+③published_frame = "base_footprint",绕过了cartographer维护map和odom的关系，直接确定map和base_footprint的关系
+
+今天发现的一个点 
+那就是move_base是监听了base_footprint和map的坐标系关系，似乎并不需要输入odom话题
+
+
+
+https://zhuanlan.zhihu.com/p/682559066

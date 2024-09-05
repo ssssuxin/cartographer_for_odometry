@@ -1,0 +1,11 @@
+一个是cartographer的环境，其说明文本在cartographer文件夹下面
+
+镭神雷达  ①ll /dev/|grep ttyUSB 或者ll /dev/|grep ttyACM查看下串口名。把lslidar_serial.launch里面的串口名换成终端打印的信息 ②注意是串口还是网口通信，网口通信要另外配置 ③给串口名权限 chmod 777 ④使用lslidar_serial.launch启动
+
+外接串口设备端口号固定
+①ls -l /sys/class/tty/ttyACM|USB查看端口号如/devices/pci0000:00/0000:00:14.0/usb1/1-2/1-2:1.0/tty/ttyACM0固定的端口号是
+②在/etc/udev/rules.d创建一个xxxxx.rules 文件 KERNELS=="1-2:1.0", KERNEL=="ttyUSB|ACM*", MODE:="0777", SYMLINK+="别名"
+
+
+今天发现的一个点 
+那就是move_base是监听了base_footprint和map的坐标系关系，似乎并不需要输入odom话题
