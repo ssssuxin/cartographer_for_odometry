@@ -1,0 +1,2 @@
+
+-G Ninja -DCATKIN_DEVEL_PREFIX=/home/suxin/English_path/fac_pro_9_5/cartographer_for_odometry/cartographer/devel_isolated -DCMAKE_INSTALL_PREFIX=/home/suxin/English_path/fac_pro_9_5/cartographer_for_odometry/cartographer/install_isolated
